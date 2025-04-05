@@ -11,8 +11,18 @@ def neutrosophic_mean_variance(k, theta_L, I_N):
 
 # Classical model calculation (fixed processing rate, no uncertainty)
 def classical_mean_variance(k, theta_L):
-    mu = k / theta_L  # Classical mean: Average time in a deterministic system
-    var = k / (theta_L ** 2)  # Classical variance: How much processing time varies in a deterministic system
+    # Classical Mean: Average time to process one unit through the stage
+    if theta_L != 0:
+        mu = k / theta_L  # Mean time in classical model
+    else:
+        mu = 0  # Handling edge case where processing rate is 0
+    
+    # Classical Variance: How much the processing time varies in a deterministic system
+    if theta_L != 0:
+        var = k / (theta_L ** 2)  # Variance in classical model
+    else:
+        var = 0  # Handling edge case where processing rate is 0
+    
     return round(mu, 4), round(var, 4)
 
 # Streamlit UI Setup
